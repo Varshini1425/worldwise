@@ -8,6 +8,7 @@ import AppLayout from "./pages/AppLayout";
 import Login from "./pages/Login";
 import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
+import City from "./components/City";
 
 const App = () => {
   const BASE_URL = "http://localhost:3000";
@@ -35,10 +36,10 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route index element={<HomePage />}></Route>
-        <Route path="/product" element={<Product />}></Route>
-        <Route path="/pricing" element={<Pricing />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/app" element={<AppLayout />}>
+        <Route path="product" element={<Product />}></Route>
+        <Route path="pricing" element={<Pricing />}></Route>
+        <Route path="login" element={<Login />}></Route>
+        <Route path="app" element={<AppLayout />}>
           <Route
             index
             element={<CityList cities={cities} isLoading={isLoading} />}
@@ -47,6 +48,7 @@ const App = () => {
             path="cities"
             element={<CityList cities={cities} isLoading={isLoading} />}
           ></Route>
+          <Route path="cities/:id" element={<City />} />
           <Route
             path="countries"
             element={<CountryList cities={cities} isLoading={isLoading} />}
