@@ -30,7 +30,7 @@ const Map = () => {
   // const mapLng = searchParams.get("lng");
 
   const [mapLat, mapLng] = useUrlPosition();
-  console.log(mapLat, mapLng);
+  // console.log(mapLat, mapLng);
 
   useEffect(() => {
     if (

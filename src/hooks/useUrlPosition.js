@@ -8,7 +8,7 @@ export function useUrlPosition() {
   const parsedLat = lat ? Number(lat) : null;
   const parsedLng = lng ? Number(lng) : null;
 
-  console.log("URL Position:", parsedLat, parsedLng);
+  // console.log("URL Position:", parsedLat, parsedLng);
 
   return [parsedLat, parsedLng];
 }
