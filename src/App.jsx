@@ -25,7 +25,7 @@ const App = () => {
             <Route path="cities" element={<CityList />}></Route>
             <Route path="cities/:id" element={<City />} />
             <Route path="countries" element={<CountryList />}></Route>
-            <Route path="form" element={<Form />}></Route>
+            <Route path="/app/form" element={<Form />}></Route>
           </Route>
 
           <Route path="*" element={<PageNotFound />}></Route>

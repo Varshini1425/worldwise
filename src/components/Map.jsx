@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Map.module.css";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   MapContainer,
   TileLayer,
@@ -16,7 +16,10 @@ import { useUrlPosition } from "../hooks/useUrlPosition";
 
 const Map = () => {
   const { cities } = useCities();
-  const [mapPosition, setMapPostion] = useState([40, 0]);
+  // const defaultPosition = [20, 80]; // India fallback or any valid coordinates
+
+  const [mapPosition, setMapPostion] = useState([20, 80]); // safe fallback
+
   const {
     isLoading: isLoadingPosition,
     position: geoLocationPosition,
@@ -27,9 +30,17 @@ const Map = () => {
   // const mapLng = searchParams.get("lng");
 
   const [mapLat, mapLng] = useUrlPosition();
+  console.log(mapLat, mapLng);
 
   useEffect(() => {
-    if (mapLat && mapLng) setMapPostion([mapLat, mapLng]);
+    if (
+      mapLat !== null &&
+      mapLng !== null &&
+      !isNaN(mapLat) &&
+      !isNaN(mapLng)
+    ) {
+      setMapPostion([mapLat, mapLng]);
+    }
   }, [mapLat, mapLng]);
 
   useEffect(() => {
@@ -75,17 +86,23 @@ const Map = () => {
 
 function ChangeCenter({ position }) {
   const map = useMap();
-  map.setView(position);
+  useEffect(() => {
+    map.setView(position);
+  }, [position, map]);
   return null;
 }
 
 function DetectClick() {
   const navigate = useNavigate();
   useMapEvents({
-    click: (e) => {
-      navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
+    click(e) {
+      const { lat, lng } = e.latlng;
+      console.log("Navigating to /app/form?lat=", lat, "lng=", lng);
+
+      navigate(`/app/form?lat=${lat}&lng=${lng}`);
     },
   });
+  return null; // <-- Important
 }
 
 export default Map;

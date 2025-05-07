@@ -35,12 +35,13 @@ function Form() {
       try {
         setIsLoadingGeocoding(true);
         setGeoCodingError("");
-        const res = await fetch(`${BASE_URL}?latitude=${lat}&longtitude${lng}`);
+        const res = await fetch(`${BASE_URL}?latitude=${lat}&longitude=${lng}`);
         const data = await res.json();
+        console.log(data);
 
         if (!data.countryCode) {
           throw new Error(
-            "That doesn't seem to be a city. Click somewher else😃"
+            "That doesn't seem to be a city. Click somewhere else😃"
           );
         }
         setCityName(data.city || data.locality || "");
@@ -68,7 +69,7 @@ function Form() {
           onChange={(e) => setCityName(e.target.value)}
           value={cityName}
         />
-        {/* <span className={styles.flag}>{emoji}</span> */}
+        <span className={styles.flag}>{emoji}</span>
       </div>
 
       <div className={styles.row}>
