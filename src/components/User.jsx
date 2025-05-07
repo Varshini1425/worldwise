@@ -20,7 +20,7 @@ function User() {
   }
 
   // ✅ Add this check to prevent crash
-  if (!user) return null;
+  // if (!user) return null;
   return (
     <div className={styles.user}>
       <img src={user.avatar} alt={user.name} />
